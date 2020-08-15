@@ -13,8 +13,10 @@ const mainToken = process.env.mainToken;
 
 console.log(chalk`{cyan [Nitro Sniper]} {blue Welcome!}`);
 const test = new Client();
-test.once('ready', () => {
-    console.log(chalk`{cyan [Nitro Sniper]} {blue Main token valid: ${test.user.tag}.}`)})
+test.on('ready', () => {
+    console.log(chalk`{cyan [Nitro Sniper]} {blue Main token valid: ${test.user.tag}.}`)
+    test.destroy()}
+)
 test.login(mainToken)
     .catch(function(err){
        console.log(chalk`{cyan [Nitro Sniper]} {red Main token not valid - ${err}}`)
@@ -23,7 +25,6 @@ test.login(mainToken)
        process.exit();
 
     })
-test.destroy()
 
 for (const token of tokens) {
    const client = new Client({
