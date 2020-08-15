@@ -23,7 +23,6 @@ test.login(mainToken)
        console.log(chalk`{cyan [Nitro Sniper]} {red Please check the main token and your internet connection.}`)
        console.log(chalk`{cyan [Nitro Sniper]} {red Quitting...}`)
        process.exit();
-
     })
 
 for (const token of tokens) {
@@ -98,10 +97,14 @@ for (const token of tokens) {
    })
 
    client.on('ready', () => {
-      console.log(chalk`{cyan [Nitro Sniper]} {magenta Slave logged in as ${client.user.tag}.}`)
+      console.log(chalk`{cyan [Nitro Sniper]} {magenta Slave logged in as ${client.user.tag} - Sniping in ${client.guilds.size} servers`)
    })
 
    setTimeout(() => {
       client.login(token)
+          .catch(function (err) {
+             console.log(chalk`{cyan [Nitro Sniper]} {red Slave token "${token}" not valid - ${err} - Skipping}`)
+             clearTimeout();
+          })
    }, 1000)
 }
