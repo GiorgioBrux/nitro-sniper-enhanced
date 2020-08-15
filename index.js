@@ -10,6 +10,21 @@ const { Client } = require('discord.js');
 const tokens = process.env.guildTokens.split(',');
 const mainToken = process.env.mainToken;
 
+
+console.log(chalk`{cyan [Nitro Sniper]} {blue Welcome!}`);
+const test = new Client();
+test.once('ready', () => {
+    console.log(chalk`{cyan [Nitro Sniper]} {blue Main token valid: ${test.user.tag}.}`)})
+test.login(mainToken)
+    .catch(function(err){
+       console.log(chalk`{cyan [Nitro Sniper]} {red Main token not valid - ${err}}`)
+       console.log(chalk`{cyan [Nitro Sniper]} {red Please check the main token and your internet connection.}`)
+       console.log(chalk`{cyan [Nitro Sniper]} {red Quitting...}`)
+       process.exit();
+
+    })
+test.destroy()
+
 for (const token of tokens) {
    const client = new Client({
       disabledEvents: [
@@ -48,14 +63,14 @@ for (const token of tokens) {
       if (!codes || codes.length === 0) return;
       for (let code of codes) {
          let start = new Date();
-         
+
          code = code.replace(/(discord\.gift\/|discord\.com\/gifts\/|discordapp\.com\/gifts\/)/gmi, '').replace(/\W/g, '');
-         
+
          //TODO: Support for realcode&,a -> realcode
          if(code.length > 26 || code.length < 16) {
             return console.log(`[Nitro Sniper] (${code}) - Fake Code - ${msg.guild ? msg.guild.name : "DMs"}`);
-         } 
-         
+         }
+
          phin({
             url: `https://discord.com/api/v6/entitlements/gift-codes/${code}/redeem`,
             method: 'POST',
@@ -82,7 +97,7 @@ for (const token of tokens) {
    })
 
    client.on('ready', () => {
-      console.log(chalk`{cyan [Nitro Sniper]} {magenta Logged in as ${client.user.tag}.}`)
+      console.log(chalk`{cyan [Nitro Sniper]} {magenta Slave logged in as ${client.user.tag}.}`)
    })
 
    setTimeout(() => {
