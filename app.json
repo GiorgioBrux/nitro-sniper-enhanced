@@ -1,7 +1,7 @@
 {
    "name": "Nitro Sniper",
    "description": "A nitro sniper for discord.",
-   "repository": "https://github.com/zzzmario/nitro-sniper",
+   "repository": "https://github.com/giorgiobrux/nitro-sniper",
    "logo": "https://discord.com/assets/2c21aeda16de354ba5334551a883b481.png",
    "env": {
       "mainToken": {
@@ -11,6 +11,11 @@
       "guildTokens": {
          "description": "Your alt accounts tokens (Typically multiple with a lot of guilds)  (Split multiple tokens with \",\")",
          "required": true
+      },
+      "useMain": {
+         "description": "Do you want to use your main token for sniping? (default: false)",
+         "required": true,
+         "value": false
       }
    }
 }

@@ -7,23 +7,12 @@ const chalk = require('chalk');
 
 const { Client } = require('discord.js');
 
+const useMain = process.env.useMain;
 const tokens = process.env.guildTokens.split(',');
 const mainToken = process.env.mainToken;
 
-
+if(useMain === 'true') tokens.unshift(mainToken);
 console.log(chalk`{cyan [Nitro Sniper]} {blue Welcome!}`);
-const test = new Client();
-test.on('ready', () => {
-    console.log(chalk`{cyan [Nitro Sniper]} {blue Main token valid: ${test.user.tag}.}`)
-    test.destroy()}
-)
-test.login(mainToken)
-    .catch(function(err){
-       console.log(chalk`{cyan [Nitro Sniper]} {red Main token not valid - ${err}}`)
-       console.log(chalk`{cyan [Nitro Sniper]} {red Please check if it's correct and your internet connection.}`)
-       console.log(chalk`{cyan [Nitro Sniper]} {red Quitting...}`)
-       process.exit();
-    })
 
 for (const token of tokens) {
    const client = new Client({
@@ -97,14 +86,24 @@ for (const token of tokens) {
    })
 
    client.on('ready', () => {
-      console.log(chalk`{cyan [Nitro Sniper]} {magenta Slave logged in as ${client.user.tag} - Sniping in ${client.guilds.size} servers`)
+      if(token === mainToken) console.log(chalk`{cyan [Nitro Sniper]} {blue Main token valid: ${client.user.tag} - Sniping in ${client.guilds.size} servers}`)
+      else console.log(chalk`{cyan [Nitro Sniper]} {magenta Slave logged in as ${client.user.tag} - Sniping in ${client.guilds.size} servers`)
+
    })
 
    setTimeout(() => {
       client.login(token)
           .catch(function (err) {
-             console.log(chalk`{cyan [Nitro Sniper]} {red Skipping slave token "${token}" - ${err}}`)
-             clearTimeout();
+             if(token === mainToken) {
+                console.log(chalk`{cyan [Nitro Sniper]} {red Main token not valid - ${err}}`)
+                console.log(chalk`{cyan [Nitro Sniper]} {red Please check if it's correct and your internet connection.}`)
+                console.log(chalk`{cyan [Nitro Sniper]} {red Quitting...}`)
+                process.exit();
+             }
+             else {
+                console.log(chalk`{cyan [Nitro Sniper]} {red Skipping slave token "${token}" - ${err}}`)
+                clearTimeout();
+             }
           })
    }, 1000)
 }
