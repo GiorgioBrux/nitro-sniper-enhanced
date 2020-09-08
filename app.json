@@ -14,8 +14,8 @@
       },
       "useMain": {
          "description": "Do you want to use your main token for sniping? (default: false)",
-         "required": true,
-         "value": false
+         "required": false,
+         "value": "false"
       }
    }
 }
