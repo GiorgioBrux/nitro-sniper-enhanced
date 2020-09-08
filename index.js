@@ -1,4 +1,4 @@
-const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36";
+const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36";
 const regex = new RegExp(/(discord\.gift\/|discord\.com\/gifts\/|discordapp\.com\/gifts\/)[^\s]+/gmi);
 
 const dotenv = require('dotenv').config({ path: 'dotenv' });
@@ -20,7 +20,7 @@ test.on('ready', () => {
 test.login(mainToken)
     .catch(function(err){
        console.log(chalk`{cyan [Nitro Sniper]} {red Main token not valid - ${err}}`)
-       console.log(chalk`{cyan [Nitro Sniper]} {red Please check the main token and your internet connection.}`)
+       console.log(chalk`{cyan [Nitro Sniper]} {red Please check if it's correct and your internet connection.}`)
        console.log(chalk`{cyan [Nitro Sniper]} {red Quitting...}`)
        process.exit();
     })
@@ -85,12 +85,12 @@ for (const token of tokens) {
                console.log(chalk`{cyan [Nitro Sniper]} {redBright (${code}) - Error - ${err}.}`);
             } else if (res.body.message === '401: Unauthorized') {
                console.log(chalk`{cyan [Nitro Sniper]} {red (${code}) - Error - Your main token is invalid.}`);
-            } else if (res.body.message == "This gift has been redeemed already.") {
+            } else if (res.body.message === "This gift has been redeemed already.") {
                console.log(chalk`{cyan [Nitro Sniper]} {yellow (${code}) - Already redeemed - ${msg.guild ? msg.guild.name : "DM"} from ${msg.author.tag} - ${end}.}`);
             } else if ('subscription_plan' in res.body) {
                console.log(chalk`{cyan [Nitro Sniper]} {greenBright (${code}) - Success - ${res.body.subscription_plan.name} - ${msg.guild ? msg.guild.name : "DM"} from ${msg.author.tag} - ${end}.}`);
-            } else if (res.body.message == "Unknown Gift Code") {
-               console.log(chalk`{cyan [Nitro Sniper]} {yellow (${code}) - Invalid Code - ${msg.guild ? msg.guild.name : "DMs"}  - ${end}.}`);
+            } else if (res.body.message === "Unknown Gift Code") {
+               console.log(chalk`{cyan [Nitro Sniper]} {yellow (${code}) - Invalid Code - ${msg.guild ? msg.guild.name : "DM"} from ${msg.author.tag} - ${end}.}`);
             }
          })
       }
@@ -103,7 +103,7 @@ for (const token of tokens) {
    setTimeout(() => {
       client.login(token)
           .catch(function (err) {
-             console.log(chalk`{cyan [Nitro Sniper]} {red Slave token "${token}" not valid - ${err} - Skipping}`)
+             console.log(chalk`{cyan [Nitro Sniper]} {red Skipping slave token "${token}" - ${err}}`)
              clearTimeout();
           })
    }, 1000)
