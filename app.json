@@ -13,8 +13,8 @@
          "required": true
       },
       "useMain": {
-         "description": "Do you want to use your main token for sniping? (default: false)",
-         "required": false,
+         "description": "Do you want to use your main token for sniping?",
+         "required": true,
          "value": "false"
       }
    }
