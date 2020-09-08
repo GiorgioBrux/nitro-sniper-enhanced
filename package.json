@@ -1,6 +1,6 @@
 {
-  "name": "nitro-sniper",
-  "version": "1.0.0",
+  "name": "nitro-sniper-enhanced",
+  "version": "2.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
