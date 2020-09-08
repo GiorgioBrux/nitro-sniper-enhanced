@@ -4,4 +4,4 @@ COPY package*.json ./
 RUN npm install --only=prod
 COPY . .
 
-CMD [ "node", "." ] 
+CMD ["./cmd.sh"]
