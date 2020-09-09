@@ -9,8 +9,8 @@
          "required": true
       },
       "guildTokens": {
-         "description": "Your alt accounts tokens (Typically multiple with a lot of guilds)  (Split multiple tokens with \",\")",
-         "required": true
+         "description": "Your alt accounts tokens. Required if useMain is set to false. (Split multiple tokens with \",\")",
+         "required": false
       },
       "useMain": {
          "description": "Do you want to use your main token for sniping?",

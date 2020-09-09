@@ -8,12 +8,12 @@ const chalk = require('chalk');
 const {Client} = require('discord.js');
 
 const useMain = process.env.useMain;
-const tokens = process.env.guildTokens.split(',');
+const tokens = process.env.guildTokens.split(',').filter(item => item);
 const mainToken = process.env.mainToken;
 
-if (useMain === 'true') tokens.unshift(mainToken);
+if (useMain === 'true' && mainToken != null) tokens.unshift(mainToken);
 console.log(chalk`{cyan [Nitro Sniper]} {blue Welcome!}`);
-if(!tokens || (tokens.length === 1 && tokens[1] === undefined)){
+if(!tokens){
     console.log(chalk`{cyan [Nitro Sniper]} {red There is no token to login to, please check your configuration. }`);
     console.log(chalk`{cyan [Nitro Sniper]} {red Quitting...}`);
     process.exit();
