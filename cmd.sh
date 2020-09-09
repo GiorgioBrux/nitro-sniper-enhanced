@@ -1,21 +1,19 @@
 #!/bin/bash
-if [ -z "$mainToken" ] || [ -z "$guildTokens" ]; then
-  printf "The following variables are missing:\n";
-  if [ -z "$mainToken" ]; then
-    printf "+ mainToken\n";
-  fi
-  if [ -z "$guildTokens" ]; then
-    printf "+ guildTokens\n";
-  fi
-  if [ -z "$useMain" ]; then
-    printf "Additionally, useMain is not set which will default it to false.\n";
-  fi
-  printf "\nPlease set the required variables. Quitting...";
+if [ -z "$mainToken" ]; then
+  printf "Error: mainToken is empty. Quitting..."
   exit 0
+elif [ -z "$guildTokens" ]; then
+  if [ "$useMain" = true ]; then
+    printf "Info: running only on mainToken because guildTokens is empty."
+  else
+    printf "Error: guildTokens is empty and useMain is set to false/undefined. Set it to true or add slave tokens. Quitting..."
+    exit 0
+  fi
 fi
 
 if [ -z "$useMain" ]; then
-  printf "useMain is not set. Defaulting to false...";
+  printf "Info: useMain is not set. Defaulting to false..."
+  useMain="false"
 fi
 
 node .

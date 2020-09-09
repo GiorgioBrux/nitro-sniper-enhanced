@@ -13,7 +13,11 @@ const mainToken = process.env.mainToken;
 
 if (useMain === 'true') tokens.unshift(mainToken);
 console.log(chalk`{cyan [Nitro Sniper]} {blue Welcome!}`);
-
+if(!tokens || (tokens.length === 1 && tokens[1] === undefined)){
+    console.log(chalk`{cyan [Nitro Sniper]} {red There is no token to login to, please check your configuration. }`);
+    console.log(chalk`{cyan [Nitro Sniper]} {red Quitting...}`);
+    process.exit();
+}
 for (const token of tokens) {
     const client = new Client({
         disabledEvents: [
@@ -96,7 +100,6 @@ for (const token of tokens) {
             .catch(function (err) {
                 if (token === mainToken) {
                     console.log(chalk`{cyan [Nitro Sniper]} {red Main token not valid - ${err}}`)
-                    console.log(chalk`{cyan [Nitro Sniper]} {red Please check if it's correct and your internet connection.}`)
                     console.log(chalk`{cyan [Nitro Sniper]} {red Quitting...}`)
                     process.exit();
                 } else {
