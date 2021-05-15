@@ -6,7 +6,7 @@
 #
 #You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-FROM node:14
+FROM node:16
 WORKDIR /usr/src/nitro-sniper
 COPY package*.json ./
 RUN npm install --only=prod
