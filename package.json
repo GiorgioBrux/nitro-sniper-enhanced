@@ -42,7 +42,7 @@
     "eslint-plugin-import": "2.23.2",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.4.0",
-    "semantic-release": "17.4.3",
+    "semantic-release": "17.4.4",
     "simple-git-hooks": "2.4.1"
   },
   "simple-git-hooks": {
