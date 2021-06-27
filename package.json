@@ -43,7 +43,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.4.0",
     "semantic-release": "17.4.3",
-    "simple-git-hooks": "2.4.1"
+    "simple-git-hooks": "2.5.1"
   },
   "simple-git-hooks": {
     "commit-msg": "npx --no-install commitlint --edit $1",
