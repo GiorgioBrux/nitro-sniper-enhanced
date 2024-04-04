@@ -1,5 +1,5 @@
 const { WebhookClient, MessageEmbed } = require("discord.js-light");
-const logging = require('./logging/logging');
+const logging = require("./logging/logging");
 
 class Webhook {
   constructor(webhookUrl, type) {
@@ -12,20 +12,22 @@ class Webhook {
     const webhooktoken = /[^/]*$/.exec(webhookUrl)[0];
     const webhookid = webhookUrl.replace(
       /^.*\/(?=[^/]*\/[^/]*$)|\/[^/]*$/g,
-      ""
+      "",
     );
     if (
       webhooktoken == null ||
       webhookid == null ||
       webhooktoken.length < webhookid.length ||
       !/https:\/\/(ptb\.|canary\.|)(discordapp|discord)\.com\/api\/webhooks\/[0-9]+\/.+/g.test(
-        webhookUrl
+        webhookUrl,
       )
     ) {
       logging.error(`{red The ${type} webhook url is not valid. Skipping...}`);
       return null;
     }
-    logging.info(`{blueBright Using ${type} webhook with id: [${webhookid}] and token: [${webhooktoken}].}`);
+    logging.info(
+      `{blueBright Using ${type} webhook with id: [${webhookid}] and token: [${webhooktoken}].}`,
+    );
     this.client = new WebhookClient(webhookid, webhooktoken);
     this.a = 1;
   }
@@ -42,7 +44,7 @@ class Webhook {
     timetaken,
     code,
     msgurl,
-    webhookping_userid
+    webhookping_userid,
   ) {
     if (!this.client) return;
     const embed = new MessageEmbed()
@@ -63,7 +65,9 @@ class Webhook {
         embeds: [embed],
       })
       .catch((err) => {
-        logging.error(`{red Tried to send nitro webhook embed but got error: ${err}.}`);
+        logging.error(
+          `{red Tried to send nitro webhook embed but got error: ${err}.}`,
+        );
       });
   }
 
@@ -87,7 +91,9 @@ class Webhook {
         embeds: [embed],
       })
       .catch((err) => {
-        logging.error(`{red Tried to send notes webhook embed but got error: ${err}.}`);
+        logging.error(
+          `{red Tried to send notes webhook embed but got error: ${err}.}`,
+        );
       });
   }
 }
