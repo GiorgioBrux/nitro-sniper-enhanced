@@ -41,7 +41,7 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-prettier": "5.1.3",
     "lint-staged": "^15.2.2",
-    "semantic-release": "23.0.7",
+    "semantic-release": "23.1.1",
     "simple-git-hooks": "2.11.1"
   },
   "simple-git-hooks": {
